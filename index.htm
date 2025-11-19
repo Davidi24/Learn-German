@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Deutsch–English Match Game</title>
+<style>
+  :root{ --bg:#0f172a; --accent:#60a5fa; --accent-2:#34d399; --text:#e5e7eb; --muted:#94a3b8 }
+  *{box-sizing:border-box} html,body{height:100%}
+  body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,'Helvetica Neue','Noto Sans','Apple Color Emoji','Segoe UI Emoji',sans-serif;color:var(--text);background:radial-gradient(1200px 800px at 10% 10%,#0b1220,#0a0f1d 50%,#070b14 100%);display:flex;align-items:center;justify-content:center;padding:24px}
+  .app{width:min(1100px,100%);background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);border-radius:20px;box-shadow:0 10px 40px rgba(0,0,0,.45);overflow:hidden;display:flex;flex-direction:column;max-height:calc(100vh - 48px)}
+  header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;gap:12px;border-bottom:1px solid rgba(255,255,255,.08);backdrop-filter:blur(6px);flex:0 0 auto;flex-wrap:wrap}
+  .title{font-size:20px;font-weight:700;letter-spacing:.3px}
+  .meta{display:flex;gap:10px;align-items:center;font-size:14px;color:var(--muted);flex-wrap:wrap}
+  .pill{display:inline-flex;gap:8px;align-items:center;padding:6px 10px;border-radius:999px;background:rgba(96,165,250,.12);color:#cfe5ff;border:1px solid rgba(96,165,250,.25);white-space:nowrap}
+  .hearts{letter-spacing:4px;font-size:18px}
+  .btn{background:var(--accent);color:#07111f;font-weight:700;border:none;border-radius:999px;padding:10px 14px;cursor:pointer;transition:transform .08s ease,box-shadow .2s ease,filter .2s ease;box-shadow:0 8px 20px rgba(96,165,250,.35)}
+  .btn:hover{transform:translateY(-1px)}
+  .btn.secondary{background:transparent;color:var(--text);border:1px solid rgba(255,255,255,.16);box-shadow:none}
+
+  /* Picker (fixed portal + backdrop to stop click-through) */
+  .picker{position:relative}
+  .picker-btn{display:inline-flex;align-items:center;gap:8px}
+  .picker-backdrop{
+    position:fixed; inset:0; background:transparent; display:none; z-index:9998;
+  }
+  .picker-backdrop.open{display:block}
+  .menu{
+    position:fixed; /* portal */
+    min-width:320px; max-width:90vw; max-height:360px; overflow:auto;
+    background:#0b1220; border:1px solid rgba(255,255,255,.16);
+    border-radius:12px; box-shadow:0 18px 40px rgba(0,0,0,.6);
+    padding:8px; display:none; z-index:9999;
+  }
+  .menu.open{display:block}
+  .menu .group-title{
+    position:sticky; top:0; background:#0b1220; z-index:1;
+    margin:6px 4px 8px; padding:4px 6px;
+    font-size:12px; color:var(--muted); font-weight:700;
+    text-transform:uppercase; letter-spacing:.5px; border-bottom:1px dashed rgba(255,255,255,.12);
+  }
+  .menu .list{display:grid; grid-template-columns:1fr; gap:6px; padding:0 4px 8px}
+  .menu .item{
+    width:100%; text-align:left;
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.18); color:var(--text);
+    padding:9px 12px; border-radius:10px; cursor:pointer;
+  }
+  .menu .item:hover{border-color:rgba(96,165,250,.6); outline:2px solid rgba(96,165,250,.25); background:rgba(255,255,255,.09)}
+
+  .board-wrap{position:relative;flex:1 1 auto;overflow:hidden;min-height:300px;overflow-y:scroll}
+  .board{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:0;height:100%}
+  .col{position:relative;padding:18px 12px;height:100%;overflow-y:auto;-webkit-overflow-scrolling:touch;scroll-behavior:smooth}
+  .col::-webkit-scrollbar{width:10px}
+  .col::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12);border-radius:999px;border:2px solid transparent;background-clip:content-box}
+  .col h3{margin:0 0 12px;color:var(--muted);font-weight:600;font-size:14px;letter-spacing:.2px}
+  ul.word-list{list-style:none;margin:0;padding:0 6px 0 0;display:flex;flex-direction:column;gap:10px}
+  li.word{position:relative;background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.10);border-radius:14px;padding:12px 38px 12px 14px;font-size:16px;cursor:pointer;user-select:none;transition:transform .08s ease,border-color .2s ease,background .2s ease,box-shadow .2s ease;box-shadow:inset 0 -30px 60px rgba(255,255,255,.02)}
+  li.word:hover{transform:translateY(-1px)}
+  li.word.selected{outline:2px solid var(--accent);border-color:rgba(96,165,250,.6);box-shadow:0 0 0 4px rgba(96,165,250,.15)}
+  li.word.disabled{opacity:.55;pointer-events:none}
+  li.word.correct{background:linear-gradient(180deg,rgba(34,197,94,.15),rgba(34,197,94,.08));border-color:rgba(34,197,94,.6)}
+  li.word.incorrect{background:linear-gradient(180deg,rgba(239,68,68,.15),rgba(239,68,68,.08));border-color:rgba(239,68,68,.6)}
+  .connector{display:none}
+
+  /* --- NEW: info button + example popup --- */
+  .info-btn{
+    position:absolute; right:10px; top:50%; transform:translateY(-50%);
+    width:22px; height:22px; border-radius:50%;
+    background:rgba(96,165,250,.18); color:#cfe5ff;
+    border:1px solid rgba(96,165,250,.55);
+    font-size:12px; font-weight:800; line-height:22px; text-align:center;
+    cursor:pointer;
+  }
+  .info-btn:hover{background:rgba(96,165,250,.28); border-color:rgba(96,165,250,.8)}
+
+  .example-backdrop{
+    position:fixed; inset:0; background:transparent; display:none; z-index:9996;
+  }
+  .example-backdrop.open{display:block}
+
+  .example-popover{
+    position:fixed; display:none; z-index:9997;
+    min-width:280px; max-width:min(420px,90vw);
+    background:#0b1220; border:1px solid rgba(255,255,255,.18);
+    border-radius:12px; box-shadow:0 18px 40px rgba(0,0,0,.6);
+    padding:12px 14px;
+  }
+  .example-popover.open{display:block}
+  .ex-title{font-weight:700; margin-bottom:6px; color:#e8f0ff}
+  .ex-de{margin:6px 0 2px; font-style:italic}
+  .ex-en{margin:2px 0 0; color:var(--muted)}
+  /* --------------------------------------- */
+
+  footer{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 20px;border-top:1px solid rgba(255,255,255,.08);color:var(--muted);font-size:14px;flex:0 0 auto;flex-wrap:wrap}
+  .progress{display:flex;align-items:center;gap:10px}
+  .bar{height:8px;width:160px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden;border:1px solid rgba(255,255,255,.10)}
+  .bar>span{display:block;height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width .3s ease}
+  .toast{position:fixed;left:50%;top:20px;transform:translateX(-50%);background:#0b1220;border:1px solid rgba(255,255,255,.2);color:var(--text);padding:10px 14px;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,.4);opacity:0;pointer-events:none;transition:opacity .2s ease}
+  .toast.show{opacity:1}
+
+  @media (max-width:780px){
+    .board{grid-template-columns:1fr;gap:10px}
+    .app{max-height:none}
+    .board-wrap{overflow:visible}
+    .col{height:auto;overflow:visible}
+  }
+</style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div class="title">Deutsch–English Match</div>
+
+      <div class="picker">
+        <button class="btn secondary picker-btn" id="pickerBtn" aria-haspopup="true" aria-expanded="false">
+          <span id="pickerLabel">Choose set ▾</span>
+        </button>
+      </div>
+
+      <div class="meta">
+        <span class="pill">Level <strong id="levelIndex">1</strong>/<span id="levelMax">?</span></span>
+        <span class="pill">Matches <strong id="matchCount">0</strong>/<span id="matchTotal">0</span></span>
+        <span class="pill hearts" id="hearts" aria-live="polite">♥♥♥</span>
+        <span class="pill" id="audioToggle">🔈 Audio: <strong id="audioState">On</strong></span>
+        <button class="btn secondary" id="restartBtn" title="Restart from the beginning">Restart</button>
+        <button class="btn" id="shuffleBtn" title="Shuffle this level">Shuffle</button>
+      </div>
+    </header>
+
+    <div class="board-wrap">
+      <div class="board" id="board">
+        <div class="col" id="leftCol">
+          <h3>Deutsch (click to hear)</h3>
+          <ul id="leftList" class="word-list"></ul>
+        </div>
+        <svg id="connector" class="connector" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"></svg>
+        <div class="col" id="rightCol">
+          <h3>English</h3>
+          <ul id="rightList" class="word-list"></ul>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="progress">
+        <div class="bar"><span id="barFill"></span></div>
+        <div id="progressText">Ready?</div>
+      </div>
+      <div>Tip: Click a German word to select it (and hear it), then its English match.</div>
+    </footer>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <!-- Backdrops/menus -->
+  <div class="picker-backdrop" id="pickerBackdrop" aria-hidden="true"></div>
+  <div class="menu" id="pickerMenu" role="menu" aria-label="Datasets"></div>
+
+  <!-- NEW: single popup + backdrop for examples -->
+  <div class="example-backdrop" id="exBackdrop" aria-hidden="true"></div>
+  <div class="example-popover" id="exPopover" role="dialog" aria-modal="true" aria-hidden="true"></div>
+
+<script>
+  const INDEX_URL = 'index.json';
+  const LAST_KEY = 'de_en_match_last';
+  const audioPrefKey = 'de_en_match_audio';
+
+  const $ = (s,el=document)=>el.querySelector(s);
+  const $$ = (s,el=document)=>[...el.querySelectorAll(s)];
+  const shuffle = (a)=>a.map(v=>[v,Math.random()]).sort((x,y)=>x[1]-y[1]).map(v=>v[0]);
+  const sleep = (ms)=>new Promise(r=>setTimeout(r,ms));
+  const showToast = (m,ms=1300)=>{ const t=$('#toast'); t.textContent=m; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),ms); };
+
+  /* -------- Audio -------- */
+  let audioEnabled = (localStorage.getItem(audioPrefKey) ?? 'on') === 'on';
+  let selectedVoice = null;
+  const audioStateEl = $('#audioState');
+  const audioToggleEl = $('#audioToggle');
+  function updateAudioUI(){ audioStateEl.textContent = audioEnabled ? 'On' : 'Off'; audioToggleEl.style.opacity = audioEnabled ? '1' : '.6'; }
+  function pickBestGermanVoice(v){ const p=v.filter(x=>(x.lang||'').toLowerCase().startsWith('de')); return p[0]||v.find(x=>x.default)||null; }
+  function initVoices(){ const got=window.speechSynthesis.getVoices(); if(got&&got.length){selectedVoice=pickBestGermanVoice(got)} window.speechSynthesis.onvoiceschanged=()=>{selectedVoice=pickBestGermanVoice(window.speechSynthesis.getVoices())}; }
+  function normalizeGermanLabel(t){ return t.replace(/\s*\/\s*/g,' oder ').replace(/\([^)]*\)/g,'').replace(/\s{2,}/g,' ').trim(); }
+  function speakGerman(t){ if(!audioEnabled||!('speechSynthesis'in window))return; const u=new SpeechSynthesisUtterance(normalizeGermanLabel(t)); u.lang='de-DE'; if(selectedVoice)u.voice=selectedVoice; try{window.speechSynthesis.cancel()}catch(e){} window.speechSynthesis.speak(u); }
+  audioToggleEl.addEventListener('click',()=>{ audioEnabled=!audioEnabled; localStorage.setItem(audioPrefKey,audioEnabled?'on':'off'); updateAudioUI(); showToast(audioEnabled?'Audio On':'Audio Off'); });
+  initVoices(); updateAudioUI();
+
+  /* -------- Elements -------- */
+  const levelIdxEl=$('#levelIndex'), levelMaxEl=$('#levelMax'), heartsEl=$('#hearts'), matchCountEl=$('#matchCount'), matchTotalEl=$('#matchTotal'), barFillEl=$('#barFill'), progressTextEl=$('#progressText');
+  const leftList=$('#leftList'), rightList=$('#rightList');
+  const restartBtn=$('#restartBtn'), shuffleBtn=$('#shuffleBtn');
+
+  const pickerBtn = $('#pickerBtn');
+  const pickerLabel = $('#pickerLabel');
+  const pickerMenu = $('#pickerMenu');
+  const pickerBackdrop = $('#pickerBackdrop');
+
+  // NEW: example popup elements
+  const exBackdrop = $('#exBackdrop');
+  const exPopover  = $('#exPopover');
+
+  let currentDatasetScript=null;
+  let INDEX=null;
+
+  let state={ level:0, lives:3, leftOrder:[], rightOrder:[], selectedLeft:null, matches:new Set() };
+
+  function renderLives(){
+    const max=3; heartsEl.textContent='♥'.repeat(state.lives)+'♡'.repeat(Math.max(0,max-state.lives));
+  }
+
+  /* -------- Index & Picker (fixed portal) -------- */
+  async function loadIndex(){
+    const res = await fetch(INDEX_URL + '?cb=' + Date.now());
+    INDEX = await res.json();
+    renderPicker();
+  }
+
+  function renderPicker(){
+    pickerMenu.innerHTML='';
+    Object.keys(INDEX).forEach(group=>{
+      const title=document.createElement('div');
+      title.className='group-title';
+      title.textContent=group;
+      pickerMenu.appendChild(title);
+
+      const wrap=document.createElement('div');
+      wrap.className='list';
+      INDEX[group].forEach(file=>{
+        const b=document.createElement('button');
+        b.type='button'; b.className='item'; b.textContent=file;
+        b.addEventListener('click',(ev)=>{
+          ev.preventDefault(); ev.stopPropagation();
+          loadDataset(file);
+          closeMenu();
+        });
+        wrap.appendChild(b);
+      });
+      pickerMenu.appendChild(wrap);
+    });
+  }
+
+  function openMenu(){
+    const r = pickerBtn.getBoundingClientRect();
+    pickerMenu.style.left = r.left + 'px';
+    pickerMenu.style.top  = (r.bottom + 8) + 'px';
+    pickerMenu.classList.add('open');
+    pickerBackdrop.classList.add('open');
+    pickerBtn.setAttribute('aria-expanded','true');
+  }
+  function closeMenu(){
+    pickerMenu.classList.remove('open');
+    pickerBackdrop.classList.remove('open');
+    pickerBtn.setAttribute('aria-expanded','false');
+  }
+
+  pickerBtn.addEventListener('click',(e)=>{ e.preventDefault(); e.stopPropagation(); pickerMenu.classList.contains('open') ? closeMenu() : openMenu(); });
+  pickerBackdrop.addEventListener('click', closeMenu);
+  window.addEventListener('resize', ()=>{ if(pickerMenu.classList.contains('open')) openMenu(); });
+  document.addEventListener('keydown',(e)=>{ if(e.key==='Escape') closeMenu(); });
+
+  /* -------- Dataset loading -------- */
+  async function loadDataset(fileName){
+    if(!fileName) return;
+    if(currentDatasetScript){ try{ currentDatasetScript.remove() }catch(e){} currentDatasetScript=null; }
+    try{ delete window.LEVELS }catch(e){ window.LEVELS=undefined }
+
+    const url = fileName + (fileName.includes('?')?'&':'?') + 'cb=' + Date.now();
+    await new Promise((resolve,reject)=>{
+      const s=document.createElement('script');
+      s.src=url; s.onload=resolve; s.onerror=()=>reject(new Error('Failed to load '+fileName));
+      document.body.appendChild(s); currentDatasetScript=s;
+    }).catch(err=>{ showToast('Could not load: ' + fileName); console.error(err); });
+
+    if(!Array.isArray(window.LEVELS) || !window.LEVELS.length){ showToast('Dataset has no LEVELS'); return; }
+
+    levelMaxEl.textContent = window.LEVELS.length;
+    state.lives=3; renderLives();
+    loadLevel(0);
+    localStorage.setItem(LAST_KEY,fileName);
+    pickerLabel.textContent = fileName.replace(/^.*\//,'') + ' ▾';
+    showToast('Loaded: ' + fileName);
+  }
+
+  function loadLevel(idx){
+    state.level=idx; state.matches=new Set(); state.selectedLeft=null;
+
+    const level=window.LEVELS[idx];
+    const pairs=level.pairs;
+    const leftItems=pairs.map((p,i)=>({label:p.de,pair:i}));
+    const rightItems=pairs.map((p,i)=>({label:p.en,pair:i}));
+
+    state.leftOrder=shuffle(leftItems);
+    state.rightOrder=shuffle(rightItems);
+
+    leftList.innerHTML=''; rightList.innerHTML='';
+    for(const item of state.leftOrder){
+      const li=document.createElement('li');
+      li.className='word'; li.textContent=item.label; li.dataset.pair=item.pair;
+      li.setAttribute('role','button'); li.setAttribute('tabindex','0');
+      li.addEventListener('click', (e)=>{ onLeftClick(e); speakGerman(item.label); });
+      li.addEventListener('keydown',(e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); li.click(); }});
+
+      // NEW: info button in each left word
+      const info=document.createElement('button');
+      info.type='button'; info.className='info-btn'; info.textContent='ⓘ';
+      info.title='Show example sentence';
+      info.addEventListener('click',(ev)=>{ ev.stopPropagation(); openExampleForPair(item.pair, info); });
+      li.appendChild(info);
+
+      leftList.appendChild(li);
+    }
+    for(const item of state.rightOrder){
+      const li=document.createElement('li');
+      li.className='word'; li.textContent=item.label; li.dataset.pair=item.pair;
+      li.setAttribute('role','button'); li.setAttribute('tabindex','0');
+      li.addEventListener('click', onRightClick);
+      li.addEventListener('keydown',(e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); li.click(); }});
+      rightList.appendChild(li);
+    }
+
+    matchTotalEl.textContent=pairs.length;
+    matchCountEl.textContent=0;
+    barFillEl.style.width='0%';
+    levelIdxEl.textContent=idx+1;
+    progressTextEl.textContent=level.name || `Level ${idx+1}`;
+  }
+
+  function onLeftClick(e){
+    const li=e.currentTarget;
+    if(li.classList.contains('disabled')) return;
+    $$('.word.selected').forEach(n=>n.classList.remove('selected'));
+    li.classList.add('selected');
+    state.selectedLeft=li;
+  }
+
+  async function onRightClick(e){
+    const right=e.currentTarget;
+    if(right.classList.contains('disabled')) return;
+    if(!state.selectedLeft){ showToast('Pick a German word first'); return; }
+    const left=state.selectedLeft;
+    const pairL=+left.dataset.pair, pairR=+right.dataset.pair;
+
+    if(pairL===pairR){
+      left.classList.remove('selected');
+      left.classList.add('correct','disabled');
+      right.classList.add('correct','disabled');
+      state.matches.add(pairL);
+      updateProgress();
+      if(state.matches.size===window.LEVELS[state.level].pairs.length){
+        await sleep(400); nextLevel();
+      }
+    }else{
+      left.classList.add('incorrect');
+      right.classList.add('incorrect');
+      await sleep(800);
+      left.classList.remove('selected','incorrect');
+      right.classList.remove('incorrect');
+      state.selectedLeft=null;
+      loseLife();
+    }
+  }
+
+  function updateProgress(){
+    const total=window.LEVELS[state.level].pairs.length;
+    const done=state.matches.size;
+    matchCountEl.textContent=done;
+    barFillEl.style.width=(done/total*100)+'%';
+    progressTextEl.textContent=done===total?'Level complete!':`Matched ${done} of ${total}`;
+  }
+
+  function loseLife(){
+    state.lives-=1; renderLives();
+    if(state.lives<=0){
+      showToast('Out of lives — back to Level 1');
+      state.lives=3; renderLives(); loadLevel(0);
+    }else{
+      showToast(`Wrong pair! ${state.lives===1?'1 life':'%s lives'.replace('%s',state.lives)} left.`);
+    }
+  }
+
+  function nextLevel(){
+    if(state.level<window.LEVELS.length-1){
+      showToast('Great! Next level →'); loadLevel(state.level+1);
+    }else{
+      showToast('🏆 You finished all levels! Starting over…',1500);
+      state.lives=3; renderLives(); loadLevel(0);
+    }
+  }
+
+  restartBtn.addEventListener('click',()=>{ state.lives=3; renderLives(); loadLevel(0); showToast('Game reset to Level 1'); });
+  shuffleBtn.addEventListener('click',()=>{ loadLevel(state.level); showToast('Shuffled!'); });
+
+  renderLives();
+
+  (async function init(){
+    await loadIndex();
+    const last = localStorage.getItem(LAST_KEY);
+    const firstGroup = Object.keys(INDEX)[0];
+    const firstFile = last || (firstGroup ? INDEX[firstGroup][0] : null);
+    pickerLabel.textContent = (firstFile ? firstFile.replace(/^.*\//,'') : 'Choose set') + ' ▾';
+    if(firstFile) loadDataset(firstFile);
+  })();
+
+  /* ========== NEW: example popup logic ========== */
+  function escapeHtml(s){ return (s??'').toString().replace(/[&<>"']/g, m=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m])); }
+
+  function openExampleForPair(pairIndex, anchorBtn){
+    const lvl = window.LEVELS[state.level];
+    const p   = (lvl && lvl.pairs && lvl.pairs[pairIndex]) || {};
+    const exDe = p.exDe || 'No example available.';
+    const exEn = p.exEn || '';
+    const title = p.de || '';
+
+    exPopover.innerHTML =
+      `<div class="ex-title">${escapeHtml(title)}</div>
+       <div class="ex-de">${escapeHtml(exDe)}</div>
+       ${exEn ? `<div class="ex-en">${escapeHtml(exEn)}</div>` : ''}`;
+
+    // position next to the button
+    const r = anchorBtn.getBoundingClientRect();
+    const margin = 8;
+    let left = Math.min(window.innerWidth - 20, r.right + margin);
+    let top  = Math.max(12, r.top - 6);
+
+    // if too close to right edge, place above/left
+    exPopover.style.left = left + 'px';
+    exPopover.style.top  = top + 'px';
+
+    exPopover.classList.add('open');
+    exPopover.setAttribute('aria-hidden','false');
+    exBackdrop.classList.add('open');
+
+    // close on outside click / Esc / scroll
+    const close = ()=> {
+      exBackdrop.classList.remove('open');
+      exPopover.classList.remove('open');
+      exPopover.setAttribute('aria-hidden','true');
+      document.removeEventListener('keydown', onKey);
+      window.removeEventListener('scroll', close, true);
+      exBackdrop.removeEventListener('click', close);
+    };
+    const onKey = (e)=>{ if(e.key==='Escape') close(); };
+
+    document.addEventListener('keydown', onKey, { once:false });
+    window.addEventListener('scroll', close, true);
+    exBackdrop.addEventListener('click', close, { once:true });
+  }
+  /* ============================================== */
+</script>
+</body>
+</html>

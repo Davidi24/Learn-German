@@ -1,0 +1,21 @@
+{
+  "A1": [
+    "A1/vocab_001.js",
+    "A1/vocab_002.js",
+    "A1/vocab_003.js",
+    "A1/vocab_004.js",
+    "A1/vocab_005.js"
+  ],
+  "A1_sent": [
+    "A1_sent/sen_1-3.js",
+    "A1_sent/sen_4-21.js",
+    "A1_sent/sen_21-30.js",
+    "A1_sent/sen_werde.js",
+    "A1_sent/sen_31-42.js"
+  ],
+  "Nomen": [
+    "Nomen/nomen_1.js",
+    "Nomen/nomen_2.js",
+    "Nomen/nomen_3.js"
+  ]
+}
