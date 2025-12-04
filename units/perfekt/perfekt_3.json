@@ -1,0 +1,170 @@
+[
+  {
+    "verb": "stehen",
+    "er_sie": "er/sie steht",
+    "perfekt": "hat gestanden",
+    "translation": "to stand"
+  },
+  {
+    "verb": "stehen bleiben",
+    "er_sie": "er/sie bleibt stehen",
+    "perfekt": "ist stehen geblieben",
+    "translation": "to stop / to remain standing"
+  },
+  {
+    "verb": "tragen",
+    "er_sie": "er/sie trägt",
+    "perfekt": "hat getragen",
+    "translation": "to carry / to wear"
+  },
+  {
+    "verb": "treffen (sich)",
+    "er_sie": "er/sie trifft",
+    "perfekt": "hat getroffen",
+    "translation": "to meet"
+  },
+  {
+    "verb": "trinken",
+    "er_sie": "er/sie trinkt",
+    "perfekt": "hat getrunken",
+    "translation": "to drink"
+  },
+  {
+    "verb": "übertragen",
+    "er_sie": "er/sie überträgt",
+    "perfekt": "hat übertragen",
+    "translation": "to transfer / broadcast"
+  },
+  {
+    "verb": "überweisen",
+    "er_sie": "er/sie überweist",
+    "perfekt": "hat überwiesen",
+    "translation": "to transfer (money)"
+  },
+  {
+    "verb": "umsteigen",
+    "er_sie": "er/sie steigt um",
+    "perfekt": "ist umgestiegen",
+    "translation": "to change (transport)"
+  },
+  {
+    "verb": "umziehen",
+    "er_sie": "er/sie zieht um",
+    "perfekt": "ist umgezogen",
+    "translation": "to move house"
+  },
+  {
+    "verb": "sich umziehen",
+    "er_sie": "er/sie zieht sich um",
+    "perfekt": "hat sich umgezogen",
+    "translation": "to change clothes"
+  },
+  {
+    "verb": "unterhalten",
+    "er_sie": "er/sie unterhält",
+    "perfekt": "hat unterhalten",
+    "translation": "to entertain / to talk"
+  },
+  {
+    "verb": "unternehmen",
+    "er_sie": "er/sie unternimmt",
+    "perfekt": "hat unternommen",
+    "translation": "to undertake / to do"
+  },
+  {
+    "verb": "unterschreiben",
+    "er_sie": "er/sie unterschreibt",
+    "perfekt": "hat unterschrieben",
+    "translation": "to sign"
+  },
+  {
+    "verb": "vergessen",
+    "er_sie": "er/sie vergisst",
+    "perfekt": "hat vergessen",
+    "translation": "to forget"
+  },
+  {
+    "verb": "vergleichen",
+    "er_sie": "er/sie vergleicht",
+    "perfekt": "hat verglichen",
+    "translation": "to compare"
+  },
+  {
+    "verb": "verschieben",
+    "er_sie": "er/sie verschiebt",
+    "perfekt": "hat verschoben",
+    "translation": "to postpone"
+  },
+  {
+    "verb": "versprechen",
+    "er_sie": "er/sie verspricht",
+    "perfekt": "hat versprochen",
+    "translation": "to promise"
+  },
+  {
+    "verb": "verstehen",
+    "er_sie": "er/sie versteht",
+    "perfekt": "hat verstanden",
+    "translation": "to understand"
+  },
+  {
+    "verb": "vorlesen",
+    "er_sie": "er/sie liest vor",
+    "perfekt": "hat vorgelesen",
+    "translation": "to read aloud"
+  },
+  {
+    "verb": "waschen (sich)",
+    "er_sie": "er/sie wäscht",
+    "perfekt": "hat gewaschen",
+    "translation": "to wash"
+  },
+  {
+    "verb": "weggehen",
+    "er_sie": "er/sie geht weg",
+    "perfekt": "ist weggegangen",
+    "translation": "to go away"
+  },
+  {
+    "verb": "wegwerfen",
+    "er_sie": "er/sie wirft weg",
+    "perfekt": "hat weggeworfen",
+    "translation": "to throw away"
+  },
+  {
+    "verb": "wehtun",
+    "er_sie": "er/sie tut weh",
+    "perfekt": "hat wehgetan",
+    "translation": "to hurt"
+  },
+  {
+    "verb": "werden",
+    "er_sie": "er/sie wird",
+    "perfekt": "ist geworden",
+    "translation": "to become"
+  },
+  {
+    "verb": "wiedersehen",
+    "er_sie": "er/sie sieht wieder",
+    "perfekt": "hat wiedergesehen",
+    "translation": "to see again"
+  },
+  {
+    "verb": "wissen",
+    "er_sie": "er/sie weiß",
+    "perfekt": "hat gewusst",
+    "translation": "to know (facts)"
+  },
+  {
+    "verb": "wollen",
+    "er_sie": "er/sie will",
+    "perfekt": "hat gewollt/wollen",
+    "translation": "to want"
+  },
+  {
+    "verb": "zurechtkommen",
+    "er_sie": "er/sie kommt zurecht",
+    "perfekt": "ist zurechtgekommen",
+    "translation": "to cope / to manage"
+  }
+]

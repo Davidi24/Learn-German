@@ -1,0 +1,554 @@
+[
+  {
+    "verb": "abfahren",
+    "er_sie": "er/sie fährt ab",
+    "perfekt": "ist abgefahren",
+    "translation": "to depart (by vehicle)"
+  },
+  {
+    "verb": "abfliegen",
+    "er_sie": "er/sie fliegt ab",
+    "perfekt": "ist abgeflogen",
+    "translation": "to take off (plane)"
+  },
+  {
+    "verb": "abgeben",
+    "er_sie": "er/sie gibt ab",
+    "perfekt": "hat abgegeben",
+    "translation": "to hand in / to submit"
+  },
+  {
+    "verb": "anfangen",
+    "er_sie": "er/sie fängt an",
+    "perfekt": "hat angefangen",
+    "translation": "to begin"
+  },
+  {
+    "verb": "ankommen",
+    "er_sie": "er/sie kommt an",
+    "perfekt": "ist angekommen",
+    "translation": "to arrive"
+  },
+  {
+    "verb": "anbieten",
+    "er_sie": "er/sie bietet an",
+    "perfekt": "hat angeboten",
+    "translation": "to offer"
+  },
+  {
+    "verb": "anrufen",
+    "er_sie": "er/sie ruft an",
+    "perfekt": "hat angerufen",
+    "translation": "to call (phone)"
+  },
+  {
+    "verb": "aufstehen",
+    "er_sie": "er/sie steht auf",
+    "perfekt": "ist aufgestanden",
+    "translation": "to get up"
+  },
+  {
+    "verb": "aussteigen",
+    "er_sie": "er/sie steigt aus",
+    "perfekt": "ist ausgestiegen",
+    "translation": "to get out / to exit"
+  },
+  {
+    "verb": "backen",
+    "er_sie": "er/sie backt",
+    "perfekt": "hat gebacken",
+    "translation": "to bake"
+  },
+  {
+    "verb": "beginnen",
+    "er_sie": "er/sie beginnt",
+    "perfekt": "hat begonnen",
+    "translation": "to start"
+  },
+  {
+    "verb": "behalten",
+    "er_sie": "er/sie behält",
+    "perfekt": "hat behalten",
+    "translation": "to keep"
+  },
+  {
+    "verb": "bekommen",
+    "er_sie": "er/sie bekommt",
+    "perfekt": "hat bekommen",
+    "translation": "to receive"
+  },
+  {
+    "verb": "bitten",
+    "er_sie": "er/sie bittet",
+    "perfekt": "hat gebeten",
+    "translation": "to ask (for something)"
+  },
+  {
+    "verb": "bleiben",
+    "er_sie": "er/sie bleibt",
+    "perfekt": "ist geblieben",
+    "translation": "to stay"
+  },
+  {
+    "verb": "brauchen",
+    "er_sie": "er/sie braucht",
+    "perfekt": "hat gebraucht",
+    "translation": "to need"
+  },
+  {
+    "verb": "bringen",
+    "er_sie": "er/sie bringt",
+    "perfekt": "hat gebracht",
+    "translation": "to bring"
+  },
+  {
+    "verb": "dabeihaben",
+    "er_sie": "er/sie hat dabei",
+    "perfekt": "hat dabeigehabt",
+    "translation": "to have with oneself"
+  },
+  {
+    "verb": "denken",
+    "er_sie": "er/sie denkt",
+    "perfekt": "hat gedacht",
+    "translation": "to think"
+  },
+  {
+    "verb": "drankommen",
+    "er_sie": "er/sie kommt dran",
+    "perfekt": "ist drangekommen",
+    "translation": "to be called next"
+  },
+  {
+    "verb": "dran sein",
+    "er_sie": "er/sie ist dran",
+    "perfekt": "ist dran gewesen",
+    "translation": "to be one's turn"
+  },
+  {
+    "verb": "dürfen",
+    "er_sie": "er/sie darf",
+    "perfekt": "hat gedurft/dürfen",
+    "translation": "to be allowed to / may"
+  },
+  {
+    "verb": "einfallen",
+    "er_sie": "es fällt ein",
+    "perfekt": "ist eingefallen",
+    "translation": "to come to mind"
+  },
+  {
+    "verb": "einladen",
+    "er_sie": "er/sie lädt ein",
+    "perfekt": "hat eingeladen",
+    "translation": "to invite"
+  },
+  {
+    "verb": "einsteigen",
+    "er_sie": "er/sie steigt ein",
+    "perfekt": "ist eingestiegen",
+    "translation": "to get in / to board"
+  },
+  {
+    "verb": "empfehlen",
+    "er_sie": "er/sie empfiehlt",
+    "perfekt": "hat empfohlen",
+    "translation": "to recommend"
+  },
+  {
+    "verb": "essen",
+    "er_sie": "er/sie isst",
+    "perfekt": "hat gegessen",
+    "translation": "to eat"
+  },
+  {
+    "verb": "fahren",
+    "er_sie": "er/sie fährt",
+    "perfekt": "ist gefahren",
+    "translation": "to drive / to ride"
+  },
+  {
+    "verb": "fallen",
+    "er_sie": "er/sie fällt",
+    "perfekt": "ist gefallen",
+    "translation": "to fall"
+  },
+  {
+    "verb": "finden",
+    "er_sie": "er/sie findet",
+    "perfekt": "hat gefunden",
+    "translation": "to find"
+  },
+  {
+    "verb": "fliegen",
+    "er_sie": "er/sie fliegt",
+    "perfekt": "ist geflogen",
+    "translation": "to fly"
+  },
+  {
+    "verb": "geben",
+    "er_sie": "er/sie gibt",
+    "perfekt": "hat gegeben",
+    "translation": "to give"
+  },
+  {
+    "verb": "gefallen",
+    "er_sie": "er/sie gefällt",
+    "perfekt": "hat gefallen",
+    "translation": "to please / to appeal"
+  },
+  {
+    "verb": "gehen",
+    "er_sie": "er/sie geht",
+    "perfekt": "ist gegangen",
+    "translation": "to go"
+  },
+  {
+    "verb": "haben",
+    "er_sie": "er/sie hat",
+    "perfekt": "hat gehabt",
+    "translation": "to have"
+  },
+  {
+    "verb": "halten",
+    "er_sie": "er/sie hält",
+    "perfekt": "hat gehalten",
+    "translation": "to hold / to stop"
+  },
+  {
+    "verb": "heißen",
+    "er_sie": "er/sie heißt",
+    "perfekt": "hat geheißen",
+    "translation": "to be called"
+  },
+  {
+    "verb": "helfen",
+    "er_sie": "er/sie hilft",
+    "perfekt": "hat geholfen",
+    "translation": "to help"
+  },
+  {
+    "verb": "kennen",
+    "er_sie": "er/sie kennt",
+    "perfekt": "hat gekannt",
+    "translation": "to know (a person/place)"
+  },
+  {
+    "verb": "kommen",
+    "er_sie": "er/sie kommt",
+    "perfekt": "ist gekommen",
+    "translation": "to come"
+  },
+  {
+    "verb": "können",
+    "er_sie": "er/sie kann",
+    "perfekt": "hat gekonnt/können",
+    "translation": "can / to be able to"
+  },
+  {
+    "verb": "lassen",
+    "er_sie": "er/sie lässt",
+    "perfekt": "hat gelassen",
+    "translation": "to let / to allow"
+  },
+  {
+    "verb": "laufen",
+    "er_sie": "er/sie läuft",
+    "perfekt": "ist gelaufen",
+    "translation": "to run"
+  },
+  {
+    "verb": "leihen",
+    "er_sie": "er/sie leiht",
+    "perfekt": "hat geliehen",
+    "translation": "to lend / to borrow"
+  },
+  {
+    "verb": "liegen",
+    "er_sie": "er/sie liegt",
+    "perfekt": "hat gelegen",
+    "translation": "to lie (be located)"
+  },
+  {
+    "verb": "lügen",
+    "er_sie": "er/sie lügt",
+    "perfekt": "hat gelogen",
+    "translation": "to lie (not tell the truth)"
+  },
+  {
+    "verb": "mitbringen",
+    "er_sie": "er/sie bringt mit",
+    "perfekt": "hat mitgebracht",
+    "translation": "to bring along"
+  },
+  {
+    "verb": "mitkommen",
+    "er_sie": "er/sie kommt mit",
+    "perfekt": "ist mitgekommen",
+    "translation": "to come along"
+  },
+  {
+    "verb": "mitnehmen",
+    "er_sie": "er/sie nimmt mit",
+    "perfekt": "hat mitgenommen",
+    "translation": "to take along"
+  },
+  {
+    "verb": "mitsprechen",
+    "er_sie": "er/sie spricht mit",
+    "perfekt": "hat mitgesprochen",
+    "translation": "to join in speaking"
+  },
+  {
+    "verb": "möchten",
+    "er_sie": "er/sie möchte",
+    "perfekt": "hat gemocht",
+    "translation": "would like"
+  },
+  {
+    "verb": "mögen",
+    "er_sie": "er/sie mag",
+    "perfekt": "hat gemocht",
+    "translation": "to like"
+  },
+  {
+    "verb": "müssen",
+    "er_sie": "er/sie muss",
+    "perfekt": "hat gemusst/müssen",
+    "translation": "must / have to"
+  },
+  {
+    "verb": "nehmen",
+    "er_sie": "er/sie nimmt",
+    "perfekt": "hat genommen",
+    "translation": "to take"
+  },
+  {
+    "verb": "riechen",
+    "er_sie": "er/sie riecht",
+    "perfekt": "hat gerochen",
+    "translation": "to smell"
+  },
+  {
+    "verb": "schlafen",
+    "er_sie": "er/sie schläft",
+    "perfekt": "hat geschlafen",
+    "translation": "to sleep"
+  },
+  {
+    "verb": "schneiden",
+    "er_sie": "er/sie schneidet",
+    "perfekt": "hat geschnitten",
+    "translation": "to cut"
+  },
+  {
+    "verb": "schreiben",
+    "er_sie": "er/sie schreibt",
+    "perfekt": "hat geschrieben",
+    "translation": "to write"
+  },
+  {
+    "verb": "sehen",
+    "er_sie": "er/sie sieht",
+    "perfekt": "hat gesehen",
+    "translation": "to see"
+  },
+  {
+    "verb": "sein",
+    "er_sie": "er/sie ist",
+    "perfekt": "ist gewesen",
+    "translation": "to be"
+  },
+  {
+    "verb": "singen",
+    "er_sie": "er/sie singt",
+    "perfekt": "hat gesungen",
+    "translation": "to sing"
+  },
+  {
+    "verb": "sitzen",
+    "er_sie": "er/sie sitzt",
+    "perfekt": "hat gesessen",
+    "translation": "to sit"
+  },
+  {
+    "verb": "sollen",
+    "er_sie": "er/sie soll",
+    "perfekt": "hat gesollt/sollen",
+    "translation": "should / supposed to"
+  },
+  {
+    "verb": "sprechen",
+    "er_sie": "er/sie spricht",
+    "perfekt": "hat gesprochen",
+    "translation": "to speak"
+  },
+  {
+    "verb": "stehen",
+    "er_sie": "er/sie steht",
+    "perfekt": "hat gestanden",
+    "translation": "to stand"
+  },
+  {
+    "verb": "stehen bleiben",
+    "er_sie": "er/sie bleibt stehen",
+    "perfekt": "ist stehen geblieben",
+    "translation": "to stop / to remain standing"
+  },
+  {
+    "verb": "tragen",
+    "er_sie": "er/sie trägt",
+    "perfekt": "hat getragen",
+    "translation": "to carry / to wear"
+  },
+  {
+    "verb": "treffen (sich)",
+    "er_sie": "er/sie trifft",
+    "perfekt": "hat getroffen",
+    "translation": "to meet"
+  },
+  {
+    "verb": "trinken",
+    "er_sie": "er/sie trinkt",
+    "perfekt": "hat getrunken",
+    "translation": "to drink"
+  },
+  {
+    "verb": "übertragen",
+    "er_sie": "er/sie überträgt",
+    "perfekt": "hat übertragen",
+    "translation": "to transfer / broadcast"
+  },
+  {
+    "verb": "überweisen",
+    "er_sie": "er/sie überweist",
+    "perfekt": "hat überwiesen",
+    "translation": "to transfer (money)"
+  },
+  {
+    "verb": "umsteigen",
+    "er_sie": "er/sie steigt um",
+    "perfekt": "ist umgestiegen",
+    "translation": "to change (transport)"
+  },
+  {
+    "verb": "umziehen",
+    "er_sie": "er/sie zieht um",
+    "perfekt": "ist umgezogen",
+    "translation": "to move house"
+  },
+  {
+    "verb": "sich umziehen",
+    "er_sie": "er/sie zieht sich um",
+    "perfekt": "hat sich umgezogen",
+    "translation": "to change clothes"
+  },
+  {
+    "verb": "unterhalten",
+    "er_sie": "er/sie unterhält",
+    "perfekt": "hat unterhalten",
+    "translation": "to entertain / to talk"
+  },
+  {
+    "verb": "unternehmen",
+    "er_sie": "er/sie unternimmt",
+    "perfekt": "hat unternommen",
+    "translation": "to undertake / to do"
+  },
+  {
+    "verb": "unterschreiben",
+    "er_sie": "er/sie unterschreibt",
+    "perfekt": "hat unterschrieben",
+    "translation": "to sign"
+  },
+  {
+    "verb": "vergessen",
+    "er_sie": "er/sie vergisst",
+    "perfekt": "hat vergessen",
+    "translation": "to forget"
+  },
+  {
+    "verb": "vergleichen",
+    "er_sie": "er/sie vergleicht",
+    "perfekt": "hat verglichen",
+    "translation": "to compare"
+  },
+  {
+    "verb": "verschieben",
+    "er_sie": "er/sie verschiebt",
+    "perfekt": "hat verschoben",
+    "translation": "to postpone"
+  },
+  {
+    "verb": "versprechen",
+    "er_sie": "er/sie verspricht",
+    "perfekt": "hat versprochen",
+    "translation": "to promise"
+  },
+  {
+    "verb": "verstehen",
+    "er_sie": "er/sie versteht",
+    "perfekt": "hat verstanden",
+    "translation": "to understand"
+  },
+  {
+    "verb": "vorlesen",
+    "er_sie": "er/sie liest vor",
+    "perfekt": "hat vorgelesen",
+    "translation": "to read aloud"
+  },
+  {
+    "verb": "waschen (sich)",
+    "er_sie": "er/sie wäscht",
+    "perfekt": "hat gewaschen",
+    "translation": "to wash"
+  },
+  {
+    "verb": "weggehen",
+    "er_sie": "er/sie geht weg",
+    "perfekt": "ist weggegangen",
+    "translation": "to go away"
+  },
+  {
+    "verb": "wegwerfen",
+    "er_sie": "er/sie wirft weg",
+    "perfekt": "hat weggeworfen",
+    "translation": "to throw away"
+  },
+  {
+    "verb": "wehtun",
+    "er_sie": "er/sie tut weh",
+    "perfekt": "hat wehgetan",
+    "translation": "to hurt"
+  },
+  {
+    "verb": "werden",
+    "er_sie": "er/sie wird",
+    "perfekt": "ist geworden",
+    "translation": "to become"
+  },
+  {
+    "verb": "wiedersehen",
+    "er_sie": "er/sie sieht wieder",
+    "perfekt": "hat wiedergesehen",
+    "translation": "to see again"
+  },
+  {
+    "verb": "wissen",
+    "er_sie": "er/sie weiß",
+    "perfekt": "hat gewusst",
+    "translation": "to know (facts)"
+  },
+  {
+    "verb": "wollen",
+    "er_sie": "er/sie will",
+    "perfekt": "hat gewollt/wollen",
+    "translation": "to want"
+  },
+  {
+    "verb": "zurechtkommen",
+    "er_sie": "er/sie kommt zurecht",
+    "perfekt": "ist zurechtgekommen",
+    "translation": "to cope / to manage"
+  }
+]
