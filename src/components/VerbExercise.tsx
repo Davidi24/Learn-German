@@ -2,7 +2,7 @@
 import { useState } from "react";
 
 export default function VerbExercise({ verbs }: { verbs: any[] }) {
-  const [queue, setQueue] = useState([...verbs]); 
+  const [queue, setQueue] = useState([...verbs]);
   const [index, setIndex] = useState(0);
 
   const [inf, setInf] = useState("");
@@ -13,6 +13,7 @@ export default function VerbExercise({ verbs }: { verbs: any[] }) {
   const [resultVisible, setResultVisible] = useState(false);
   const [autoNextMsg, setAutoNextMsg] = useState(false);
   const [finished, setFinished] = useState(false);
+  const [wrongOnce, setWrongOnce] = useState(false);
 
   const current = queue[index];
 
@@ -24,6 +25,7 @@ export default function VerbExercise({ verbs }: { verbs: any[] }) {
   const okInf = inf.trim() === cInf.trim();
   const okErsie = ersie.trim() === cErsie.trim();
   const okPerfekt = perfekt.trim() === cPerfekt.trim();
+
   const allCorrect = okInf && okErsie && okPerfekt;
 
   const infColor = submitted ? (okInf ? "#28a745" : "#dc3545") : "#ccc";
@@ -36,19 +38,24 @@ export default function VerbExercise({ verbs }: { verbs: any[] }) {
     setSubmitted(true);
 
     if (allCorrect) {
-      setAutoNextMsg(true);
-      setTimeout(() => goNextCorrect(), 800);
+      if (!wrongOnce) {
+        setAutoNextMsg(true);
+        setTimeout(() => goNext(), 900);
+      } else {
+        setAutoNextMsg(true);
+        setTimeout(() => goNext(), 900);
+      }
     } else {
-      requeueWrongVerb();
-      setTimeout(() => goNextWrong(), 800);
+      if (!wrongOnce) {
+        requeueWrongVerb();
+        setWrongOnce(true);
+      }
     }
   }
 
   function requeueWrongVerb() {
     const wrongVerb = queue[index];
-
     const newQueue = [...queue];
-    newQueue.splice(index, 1);
 
     let insertPos = index + 7;
     if (insertPos > newQueue.length) insertPos = newQueue.length;
@@ -58,16 +65,7 @@ export default function VerbExercise({ verbs }: { verbs: any[] }) {
     setQueue(newQueue);
   }
 
-  function goNextCorrect() {
-    if (index >= queue.length - 1) {
-      setFinished(true);
-      return;
-    }
-    setIndex((i) => i + 1);
-    reset();
-  }
-
-  function goNextWrong() {
+  function goNext() {
     if (index >= queue.length - 1) {
       setFinished(true);
       return;
@@ -83,6 +81,7 @@ export default function VerbExercise({ verbs }: { verbs: any[] }) {
     setSubmitted(false);
     setResultVisible(false);
     setAutoNextMsg(false);
+    setWrongOnce(false);
   }
 
   function restartAll() {
