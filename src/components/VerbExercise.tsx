@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 export default function VerbExercise({ verbs }: { verbs: any[] }) {
   const [queue, setQueue] = useState([...verbs]);
@@ -14,6 +14,11 @@ export default function VerbExercise({ verbs }: { verbs: any[] }) {
   const [autoNextMsg, setAutoNextMsg] = useState(false);
   const [finished, setFinished] = useState(false);
   const [wrongOnce, setWrongOnce] = useState(false);
+
+  // NEW REFS FOR ENTER NAVIGATION
+  const infRef = useRef<HTMLInputElement | null>(null);
+  const ersieRef = useRef<HTMLInputElement | null>(null);
+  const perfektRef = useRef<HTMLInputElement | null>(null);
 
   const current = queue[index];
 
@@ -38,13 +43,8 @@ export default function VerbExercise({ verbs }: { verbs: any[] }) {
     setSubmitted(true);
 
     if (allCorrect) {
-      if (!wrongOnce) {
-        setAutoNextMsg(true);
-        setTimeout(() => goNext(), 900);
-      } else {
-        setAutoNextMsg(true);
-        setTimeout(() => goNext(), 900);
-      }
+      setAutoNextMsg(true);
+      setTimeout(() => goNext(), 900);
     } else {
       if (!wrongOnce) {
         requeueWrongVerb();
@@ -82,6 +82,9 @@ export default function VerbExercise({ verbs }: { verbs: any[] }) {
     setResultVisible(false);
     setAutoNextMsg(false);
     setWrongOnce(false);
+
+    // focus first input on new verb
+    setTimeout(() => infRef.current?.focus(), 50);
   }
 
   function restartAll() {
@@ -99,6 +102,19 @@ export default function VerbExercise({ verbs }: { verbs: any[] }) {
     fontSize: 16,
     marginRight: 20,
   });
+
+  // ENTER KEY HANDLER
+  function handleEnter(e: React.KeyboardEvent, field: string) {
+    if (e.key !== "Enter") return;
+
+    if (field === "inf") {
+      ersieRef.current?.focus();
+    } else if (field === "ersie") {
+      perfektRef.current?.focus();
+    } else if (field === "perfekt") {
+      submit();
+    }
+  }
 
   if (finished) {
     return (
@@ -141,23 +157,29 @@ export default function VerbExercise({ verbs }: { verbs: any[] }) {
         }}
       >
         <input
+          ref={infRef}
           placeholder="Infinitiv"
           value={inf}
           onChange={(e) => setInf(e.target.value)}
+          onKeyDown={(e) => handleEnter(e, "inf")}
           style={inputStyle(infColor)}
         />
 
         <input
+          ref={ersieRef}
           placeholder="er/sie/es"
           value={ersie}
           onChange={(e) => setErsie(e.target.value)}
+          onKeyDown={(e) => handleEnter(e, "ersie")}
           style={inputStyle(ersieColor)}
         />
 
         <input
+          ref={perfektRef}
           placeholder="Partizip II"
           value={perfekt}
           onChange={(e) => setPerfekt(e.target.value)}
+          onKeyDown={(e) => handleEnter(e, "perfekt")}
           style={inputStyle(perfektColor)}
         />
       </div>
