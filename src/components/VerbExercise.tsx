@@ -15,7 +15,6 @@ export default function VerbExercise({ verbs }: { verbs: any[] }) {
   const [finished, setFinished] = useState(false);
   const [wrongOnce, setWrongOnce] = useState(false);
 
-  // NEW REFS FOR ENTER NAVIGATION
   const infRef = useRef<HTMLInputElement | null>(null);
   const ersieRef = useRef<HTMLInputElement | null>(null);
   const perfektRef = useRef<HTMLInputElement | null>(null);
@@ -82,8 +81,6 @@ export default function VerbExercise({ verbs }: { verbs: any[] }) {
     setResultVisible(false);
     setAutoNextMsg(false);
     setWrongOnce(false);
-
-    // focus first input on new verb
     setTimeout(() => infRef.current?.focus(), 50);
   }
 
@@ -103,17 +100,12 @@ export default function VerbExercise({ verbs }: { verbs: any[] }) {
     marginRight: 20,
   });
 
-  // ENTER KEY HANDLER
-  function handleEnter(e: React.KeyboardEvent, field: string) {
+  function handleEnter(e: any, field: string) {
     if (e.key !== "Enter") return;
 
-    if (field === "inf") {
-      ersieRef.current?.focus();
-    } else if (field === "ersie") {
-      perfektRef.current?.focus();
-    } else if (field === "perfekt") {
-      submit();
-    }
+    if (field === "inf") ersieRef.current?.focus();
+    else if (field === "ersie") perfektRef.current?.focus();
+    else if (field === "perfekt") submit();
   }
 
   if (finished) {
@@ -137,6 +129,25 @@ export default function VerbExercise({ verbs }: { verbs: any[] }) {
         </button>
       </div>
     );
+  }
+
+  // DARK MODE FRIENDLY RESULT BOX
+  const resultBoxStyle: React.CSSProperties = {
+    padding: 20,
+    borderRadius: 10,
+    width: "fit-content",
+    boxShadow: "0 0 10px rgba(0,0,0,0.2)",
+    fontSize: 18,
+    background: "var(--result-bg)",
+    color: "var(--result-text)",
+  };
+
+  // Dynamic CSS vars for dark/light mode
+  const root = typeof window !== "undefined" ? document.documentElement : null;
+  if (root) {
+    const dark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    root.style.setProperty("--result-bg", dark ? "#1f1f1f" : "#f8f9fa");
+    root.style.setProperty("--result-text", dark ? "#e8e8e8" : "#111");
   }
 
   return (
@@ -206,8 +217,9 @@ export default function VerbExercise({ verbs }: { verbs: any[] }) {
           Submit
         </button>
 
+        {/* TOGGLE BUTTON */}
         <button
-          onClick={() => setResultVisible(true)}
+          onClick={() => setResultVisible((prev) => !prev)}
           style={{
             padding: "10px 22px",
             background: "#17a2b8",
@@ -218,21 +230,12 @@ export default function VerbExercise({ verbs }: { verbs: any[] }) {
             cursor: "pointer",
           }}
         >
-          Check Result
+          {resultVisible ? "Hide Result" : "Check Result"}
         </button>
       </div>
 
       {resultVisible && (
-        <div
-          style={{
-            padding: 20,
-            borderRadius: 10,
-            background: "#f8f9fa",
-            width: "fit-content",
-            boxShadow: "0 0 10px rgba(0,0,0,0.08)",
-            fontSize: 18,
-          }}
-        >
+        <div style={resultBoxStyle}>
           <div><b>Infinitiv:</b> {cInf}</div>
           <div><b>er/sie/es:</b> {cErsieFull}</div>
           <div><b>Partizip II:</b> {cPerfekt}</div>
