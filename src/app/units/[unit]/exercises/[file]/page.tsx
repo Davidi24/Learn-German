@@ -5,13 +5,18 @@ import path from "path";
 export default async function Page({ params }: { params: Promise<any> }) {
   const { unit, file } = await params;
 
+
+  const cleanName = file.replace(/\.json$/, "");
+
   const filePath = path.join(
     process.cwd(),
     "units",
     unit,
     "exercises",
-    file + ".json"
+    cleanName + ".json"
   );
+
+  console.log("📄 Loading exercise file:", filePath);
 
   let raw = "";
   try {

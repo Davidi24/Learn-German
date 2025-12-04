@@ -1,0 +1,188 @@
+[
+  {
+    "verb": "abfahren",
+    "er_sie": "er/sie fährt ab",
+    "perfekt": "ist abgefahren",
+    "translation": "to depart (by vehicle)"
+  },
+  {
+    "verb": "abfliegen",
+    "er_sie": "er/sie fliegt ab",
+    "perfekt": "ist abgeflogen",
+    "translation": "to take off (plane)"
+  },
+  {
+    "verb": "abgeben",
+    "er_sie": "er/sie gibt ab",
+    "perfekt": "hat abgegeben",
+    "translation": "to hand in / to submit"
+  },
+  {
+    "verb": "anbieten",
+    "er_sie": "er/sie bietet an",
+    "perfekt": "hat angeboten",
+    "translation": "to offer"
+  },
+  {
+    "verb": "anfangen",
+    "er_sie": "er/sie fängt an",
+    "perfekt": "hat angefangen",
+    "translation": "to begin"
+  },
+  {
+    "verb": "ankommen",
+    "er_sie": "er/sie kommt an",
+    "perfekt": "ist angekommen",
+    "translation": "to arrive"
+  },
+  {
+    "verb": "anrufen",
+    "er_sie": "er/sie ruft an",
+    "perfekt": "hat angerufen",
+    "translation": "to call (phone)"
+  },
+  {
+    "verb": "aufstehen",
+    "er_sie": "er/sie steht auf",
+    "perfekt": "ist aufgestanden",
+    "translation": "to get up"
+  },
+  {
+    "verb": "aussteigen",
+    "er_sie": "er/sie steigt aus",
+    "perfekt": "ist ausgestiegen",
+    "translation": "to get out / to exit"
+  },
+  {
+    "verb": "backen",
+    "er_sie": "er/sie backt",
+    "perfekt": "hat gebacken",
+    "translation": "to bake"
+  },
+  {
+    "verb": "beginnen",
+    "er_sie": "er/sie beginnt",
+    "perfekt": "hat begonnen",
+    "translation": "to start"
+  },
+  {
+    "verb": "behalten",
+    "er_sie": "er/sie behält",
+    "perfekt": "hat behalten",
+    "translation": "to keep"
+  },
+  {
+    "verb": "bekommen",
+    "er_sie": "er/sie bekommt",
+    "perfekt": "hat bekommen",
+    "translation": "to receive"
+  },
+  {
+    "verb": "bitten",
+    "er_sie": "er/sie bittet",
+    "perfekt": "hat gebeten",
+    "translation": "to ask (for something)"
+  },
+  {
+    "verb": "bleiben",
+    "er_sie": "er/sie bleibt",
+    "perfekt": "ist geblieben",
+    "translation": "to stay"
+  },
+  {
+    "verb": "brauchen",
+    "er_sie": "er/sie braucht",
+    "perfekt": "hat gebraucht",
+    "translation": "to need"
+  },
+  {
+    "verb": "bringen",
+    "er_sie": "er/sie bringt",
+    "perfekt": "hat gebracht",
+    "translation": "to bring"
+  },
+  {
+    "verb": "dabeihaben",
+    "er_sie": "er/sie hat dabei",
+    "perfekt": "hat dabeigehabt",
+    "translation": "to have with oneself"
+  },
+  {
+    "verb": "denken",
+    "er_sie": "er/sie denkt",
+    "perfekt": "hat gedacht",
+    "translation": "to think"
+  },
+  {
+    "verb": "drankommen",
+    "er_sie": "er/sie kommt dran",
+    "perfekt": "ist drangekommen",
+    "translation": "to be next"
+  },
+  {
+    "verb": "dran sein",
+    "er_sie": "er/sie ist dran",
+    "perfekt": "ist dran gewesen",
+    "translation": "to be one's turn"
+  },
+  {
+    "verb": "dürfen",
+    "er_sie": "er/sie darf",
+    "perfekt": "hat gedurft/dürfen",
+    "translation": "to be allowed to / may"
+  },
+  {
+    "verb": "einfallen",
+    "er_sie": "es fällt ein",
+    "perfekt": "ist eingefallen",
+    "translation": "to come to mind"
+  },
+  {
+    "verb": "einladen",
+    "er_sie": "er/sie lädt ein",
+    "perfekt": "hat eingeladen",
+    "translation": "to invite"
+  },
+  {
+    "verb": "einsteigen",
+    "er_sie": "er/sie steigt ein",
+    "perfekt": "ist eingestiegen",
+    "translation": "to get in / to board"
+  },
+  {
+    "verb": "empfehlen",
+    "er_sie": "er/sie empfiehlt",
+    "perfekt": "hat empfohlen",
+    "translation": "to recommend"
+  },
+  {
+    "verb": "essen",
+    "er_sie": "er/sie isst",
+    "perfekt": "hat gegessen",
+    "translation": "to eat"
+  },
+  {
+    "verb": "fahren",
+    "er_sie": "er/sie fährt",
+    "perfekt": "ist gefahren",
+    "translation": "to drive / to ride"
+  },
+  {
+    "verb": "fallen",
+    "er_sie": "er/sie fällt",
+    "perfekt": "ist gefallen",
+    "translation": "to fall"
+  },
+  {
+    "verb": "finden",
+    "er_sie": "er/sie findet",
+    "perfekt": "hat gefunden",
+    "translation": "to find"
+  },
+  {
+    "verb": "fliegen",
+    "er_sie": "er/sie fliegt",
+    "perfekt": "ist geflogen",
+    "translation": "to fly"
+  }
+]

@@ -1,14 +1,49 @@
-"use server";
+import { getAllUnits } from "@/lib/getNewWords"
+import type { SidebarData } from "@/components/layout/types"
 
-import { getAllUnits } from "@/lib/getNewWords";
+function normalize(p: string) {
+  let u = p.replace(/\\/g, "/")
+  if (!u.startsWith("/")) u = "/" + u
+  return u.replace(/\.(json|txt|md)$/, "")
+}
 
-export async function sideBarData() {
+function buildNav(node: any): any {
+  if (node.type === "file") {
+    return {
+      title: node.name.replace(/\.(json|txt|md)$/, ""),
+      icon: "file",
+      url: normalize(node.path)
+    }
+  }
+
+  return {
+    title: node.name,
+    icon: "folder",
+    items: node.children ? node.children.map(buildNav) : []
+  }
+}
+
+export async function loadSidebarData(): Promise<SidebarData> {
+  const raw = getAllUnits()
+
   return {
     user: {
-      name: "AI Land",
-      email: "ailand@example.com",
-      avatar: "/assets/icons/logo.svg",
+      name: "John Doe",
+      email: "john.doe@example.com",
+      avatar: "https://avatar.vercel.sh/john"
     },
-    units: getAllUnits(),  
-  };
+    teams: [
+      {
+        name: "AILand",
+        logo: "folder",
+        plan: "Pro"
+      }
+    ],
+    navGroups: [
+      {
+        title: "Units",
+        items: raw.map(buildNav)
+      }
+    ]
+  }
 }
